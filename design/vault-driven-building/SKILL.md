@@ -7,7 +7,22 @@ STARTER_CHARACTER = 🏛️
 
 Build [THING] using the Vault-first methodology: research before plan, plan before code, Vault before everything.
 
-## Step 1: Build the Vault
+## Vault Directory Structure
+
+All Vault content is written to disk under `vault/[project-slug]/`:
+
+```
+vault/[project-slug]/
+  summary.md              ← cross-synthesis and strategy (written after all pillars)
+  prd.md                  ← PRD, UX flows, acceptance criteria (written after summary)
+  backlog.md              ← prioritized task list (written after PRD)
+  pillars/
+    [pillar-name].md      ← one file per pillar (written after research)
+```
+
+Use a kebab-case slug (e.g., `user-auth`, `payment-flow`, `new-product`).
+
+## Step 1: Build the Vault Structure
 
 Identify every pillar this project depends on:
 - Users, market, competitors
@@ -15,45 +30,90 @@ Identify every pillar this project depends on:
 - Tech constraints and integrations
 - Legal/regulatory, ops, economics, risks
 
-Write a pillar list with priorities. This is the Vault's foundation.
+Write a pillar list with priorities. Create the vault directory. This is the Vault's foundation.
 
 ## Step 2: Research Each Pillar in Parallel
 
-For each pillar, create a folder containing:
+For each pillar, gather:
 - Sources and links
 - Raw notes and extracts
-- What each source supports
+- What each source supports or contradicts
 
 Run research concurrently across all pillars.
 
-## Step 3: Synthesize
+## Step 3: Write Each Pillar to Disk
 
-For each pillar, distill into:
-- What matters
-- What's uncertain
-- Decisions and assumptions
-- Risks
-- Minimum facts needed to build correctly
+After research, write one file per pillar to `vault/[project-slug]/pillars/[pillar-name].md`.
 
-Then do one cross-synthesis: resolve conflicts across pillars into a single strategy.
+Each pillar file must contain:
 
-## Step 4: Write the PRD
+```markdown
+# Pillar: [Name]
 
-Only after synthesis is complete, write:
-- PRD
+## What matters
+[Key facts and signals — bullets only]
+
+## What's uncertain
+[Gaps, conflicting sources, unknowns]
+
+## Decisions and assumptions
+[What this pillar forces us to decide or assume]
+
+## Risks
+[What could go wrong based on this pillar]
+
+## Sources
+[URLs or references with brief labels]
+```
+
+Write all pillar files before proceeding to synthesis.
+
+## Step 4: Synthesize to summary.md
+
+Do one cross-synthesis pass across all pillar files. Write `vault/[project-slug]/summary.md`:
+
+```markdown
+# [Project] — Vault Summary
+
+_Researched: [date]_
+
+## Strategic Conclusion
+[One paragraph — the essential conclusion that constrains the PRD]
+
+## Key Findings Per Pillar
+[Per pillar, bullets only, no padding]
+
+## Cross-Cutting Insights
+[What emerged from connecting the pillars — numbered list]
+
+## Open Questions
+[Uncertainties that must be resolved before or during build]
+
+## Pillar Files
+[Links to each pillar file]
+```
+
+## Step 5: Write the PRD
+
+Only after `summary.md` is complete, write `vault/[project-slug]/prd.md`:
+- Problem statement and goal
 - UX flows
 - Acceptance criteria
 - Architecture plan
-- Backlog
 
-Everything must be strictly constrained by what's in the Vault. No PRD item without Vault backing.
+Every PRD item must be traceable to a Vault pillar. No PRD item without Vault backing.
 
-## Step 5: Build Iteratively
+## Step 6: Write the Backlog
+
+Write `vault/[project-slug]/backlog.md` — a prioritized task list derived strictly from the PRD.
+
+## Step 7: Build Iteratively
 
 Build the product. Every time you learn something new:
-1. Update the Vault first
-2. Update the PRD/backlog second
-3. Update the code last
+1. Update the relevant pillar file in the Vault first
+2. Update `summary.md` if strategy changes
+3. Update `prd.md` and `backlog.md` second
+4. Update the code last
 
 Don't stop until the solution is finished and deployed.
 
@@ -63,3 +123,4 @@ Don't stop until the solution is finished and deployed.
 - Skipping synthesis between research and PRD
 - Updating code without first updating the Vault
 - Treating the Vault as write-once rather than living documentation
+- Leaving Vault content only in chat — always write to disk
