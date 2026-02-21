@@ -1,6 +1,6 @@
 ---
 name: vault-driven-research
-description: Vault-structured research methodology: identifies all relevant pillars, researches each in parallel, synthesizes findings into a 2-5 page summary. Use when researching a topic, technology, market, or system before making decisions.
+description: "Vault-structured research methodology: identifies all relevant pillars, researches each in parallel, synthesizes findings into a 2-5 page summary. Use when researching a topic, technology, market, or system before making decisions."
 ---
 
 STARTER_CHARACTER = 🔬
